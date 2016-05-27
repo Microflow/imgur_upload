@@ -13,6 +13,8 @@ defmodule ImgurUpload.ImageTest do
 
     {id, link} = Image.image_upload(path)
 
+    Logger.debug inspect([id, link])
+
     {:ok, _body} = HTTPoison.get(link)
   end
 

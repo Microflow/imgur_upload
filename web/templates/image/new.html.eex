@@ -1,0 +1,7 @@
+<h1 class="page-header">Upload a new image</h1>
+
+
+<%= form_for @conn, "/image", [as: :image, multipart: true], fn(f)-> %>
+<%= file_input f, :file %>
+<%= submit "Upload" %>
+<% end %>

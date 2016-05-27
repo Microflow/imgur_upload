@@ -3,6 +3,7 @@ defmodule ImgurUpload.Repo.Migrations.CreateImage do
 
   def change do
     create table(:images) do
+      add :imgur_id, :string
       add :url, :string
       add :filename, :string
 

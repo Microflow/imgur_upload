@@ -16,7 +16,9 @@ defmodule ImgurUpload.Router do
   scope "/", ImgurUpload do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    resources "/image", ImageController
+    get "/", ImageController, :index
+    #get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.

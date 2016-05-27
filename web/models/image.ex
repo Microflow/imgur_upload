@@ -2,6 +2,7 @@ defmodule ImgurUpload.Image do
   use ImgurUpload.Web, :model
 
   schema "images" do
+    field :imgur_id, :string
     field :url, :string
     field :filename, :string
 
@@ -29,9 +30,8 @@ defmodule ImgurUpload.Image do
   # TODO: validate file path
   # validate response
   # validate imgur response status code
-  def image_upload(filepath) do
-    filename = Path.basename(filepath)
-    response = HTTPoison.post!(@imgur_url, {:multipart, [{:file, filepath, { ["form-data"], [name: "\"image\"", filename: "\"#{filename}\""]},[]}]}, %{"Authorization" => "Client-ID #{imgur_client_id}"})
+  def image_upload(%{filename: filename, path: path}) do
+    response = HTTPoison.post!(@imgur_url, {:multipart, [{:file, path, { ["form-data"], [name: "\"image\"", filename: "\"#{filename}\""]},[]}]}, %{"Authorization" => "Client-ID #{imgur_client_id}"})
     %{"data" => %{"id" => id, "link" => link}, "success" => true} = Poison.decode!(response.body)
     {id, link}
   end
