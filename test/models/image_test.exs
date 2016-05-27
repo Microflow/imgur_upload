@@ -11,7 +11,7 @@ defmodule ImgurUpload.ImageTest do
   test "image_upload works" do
     path = Path.join(__DIR__, "../../priv/static/dissectcodelogo.png")
 
-    {id, link} = Image.image_upload(path)
+    {id, link} = Image.image_upload(%{filename: "cool.jpg", path: path})
 
     Logger.debug inspect([id, link])
 
